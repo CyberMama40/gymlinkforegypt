@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#474649",
+                        "on-primary-container": "#556d00",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#c8c6c8",
+                        "surface-dim": "#121414",
+                        "secondary-fixed": "#e4e2e4",
+                        "on-secondary": "#303032",
+                        "tertiary": "#ffffff",
+                        "on-background": "#e2e2e2",
+                        "surface-container-highest": "#333535",
+                        "surface-container": "#1e2020",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-bright": "#37393a",
+                        "inverse-surface": "#e2e2e2",
+                        "on-surface": "#e2e2e2",
+                        "secondary": "#c8c6c8",
+                        "primary-fixed": "#c3f400",
+                        "on-error": "#690005",
+                        "primary": "#ffffff",
+                        "background": "#121414",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-tertiary": "#313030",
+                        "on-secondary-container": "#b6b4b7",
+                        "outline-variant": "#444933",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-container-low": "#1a1c1c",
+                        "surface": "#121414",
+                        "tertiary-fixed": "#e5e2e1",
+                        "inverse-primary": "#506600",
+                        "on-surface-variant": "#c4c9ac",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#656464",
+                        "on-secondary-fixed": "#1b1b1d",
+                        "primary-container": "#c3f400",
+                        "primary-fixed-dim": "#abd600",
+                        "tertiary-container": "#e5e2e1",
+                        "surface-container-high": "#282a2b",
+                        "on-primary": "#283500",
+                        "on-primary-fixed": "#161e00",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "surface-container-lowest": "#0c0f0f",
+                        "outline": "#8e9379",
+                        "secondary-container": "#474649",
+                        "surface-variant": "#333535",
+                        "surface-tint": "#abd600"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "margin-mobile": "20px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-surface {
+            background: rgba(44, 44, 46, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lime-glow {
+            box-shadow: 0 0 15px rgba(195, 244, 0, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full bg-surface border-b border-white/10 px-margin-mobile py-base flex justify-between items-center h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary-fixed/30">
+<img alt="Trainer" class="w-full h-full object-cover" data-alt="A professional fitness trainer with a confident smile, wearing high-performance athletic apparel. The background is a blurred, high-end modern gym with sleek equipment and cool, blue-toned industrial lighting. The image captures an elite coaching aesthetic with sharp focus and cinematic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjmdRhpJwpzkH5IlxACy_kYpN6Uko99OGuMH8xpCFuKwZqJIOXmzf9l84Wffinl_vA4_120xnVO1cPQLtHruChi6i9hO8i1q8Lq0x1JJE8hEUfSkKyjiyl3_EZ30bQrjxGSjonSsqbmu1o6Qdx11Qal9gw74PtfsAY7jqY4oeA_5pyAVzCOIhceQVbBJcBTex4v8dBr057kRgTe1xzcX33b2yJTACd03sj7uVuLE3w-BSFSuXyMgBkquFMrGnlD3I1CqDX3KTv5xk"/>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">GymLink</h1>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-fixed lime-glow"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Coach Marcus (Online)</span>
+</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 mb-24 overflow-y-auto px-margin-mobile pt-md space-y-md">
+<!-- Date Divider -->
+<div class="flex justify-center">
+<span class="text-label-sm font-label-sm px-3 py-1 bg-surface-container rounded-full text-on-surface-variant">Today</span>
+</div>
+<!-- Trainer Message: Initial Check-in -->
+<div class="flex gap-3 max-w-[85%] group">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 mt-1">
+<img alt="Coach Marcus" class="w-full h-full object-cover" data-alt="Close-up portrait of a fitness professional in a slate gray athletic shirt, looking directly at the camera with an encouraging expression. The lighting is crisp and professional, highlighting skin texture and athletic build. The background features the soft blur of a premium training facility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeYsLik2fbL28GG73frB2D68rQztiMs-2UZ8JZ29DNEQwhRAtOYnATBEWS5cv9uqG-FDLaSqD7QJmp_POVYyZZOiB3zsIG_6ZX3y22SnxSBJYGrf3_52UKyzACnXXwAWYm3Q_9LM08zdlaRw2q7Gr_Y4P7P232D0wOoXoNpqh6zbHwh9A0b-_lxZdDg-3R2_2TrVl4n_Bj5tXvszxX0mPI_Jqgyk8dIMZjiDa0WLSl-tngeCJaAHAEznWAvuWc9BXFie-DIUi36ko"/>
+</div>
+<div class="space-y-1">
+<div class="glass-surface p-md rounded-2xl rounded-tl-none">
+<p class="text-body-md font-body-md text-on-surface">Great session yesterday. How are those glutes feeling? Don't forget to log your midday meal for the macro check.</p>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant ml-1">09:12 AM</span>
+</div>
+</div>
+<!-- Client Message: Meal Photo -->
+<div class="flex flex-row-reverse gap-3 max-w-[85%] ml-auto">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 mt-1 border border-white/5">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="person">person</span>
+</div>
+<div class="space-y-1 text-right">
+<div class="glass-surface p-base rounded-2xl rounded-tr-none overflow-hidden">
+<div class="rounded-xl overflow-hidden mb-2">
+<img alt="Healthy Meal" class="w-full aspect-square object-cover" data-alt="A top-down view of a gourmet healthy meal featuring grilled salmon, vibrant green asparagus, and quinoa salad in a minimalist dark ceramic bowl. The scene is lit with natural, soft sunlight from a side window, emphasizing the textures and fresh colors of the ingredients. The aesthetic is clean, high-end, and nutrition-focused." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF2aF-kL0sgBTXNfhKe__SK7WSM7Vglu5W6YyBhpb2T4bjsBOCbPsn9eyLkHRpFLZyIlVEOuEgqgN6FxLSTz0suDSOzAE0KzvHyDVFQLtw0sM7p1ZJUbDcWWCkveMLq1mWi3k8BQqPLuEzMMU0mqMUcwZRzroGLxLvhTmue1V0OZbqnvC_6SEaqMqqTMYbur-jlcWBS1z6UcU7GT6pRkg5HSplkdDsXZ0sNvkm2jQJcCHJPTxj_ndXr0H96Rv0GwYgRC68RQGF8ME"/>
+</div>
+<p class="text-body-md font-body-md text-on-surface text-left px-2">Feeling it for sure! Here's lunch: Salmon, quinoa, and double greens. Over 40g of protein here.</p>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant mr-1">12:45 PM</span>
+</div>
+</div>
+<!-- Trainer Message: Voice Response & Feedback -->
+<div class="flex gap-3 max-w-[85%] group">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 mt-1">
+<img alt="Coach Marcus" class="w-full h-full object-cover" data-alt="Close-up of a coach Marcus avatar. Professional athletic photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc_H8IoGXVyGFi3y6j76WoQMhAB_91R1Toqq2NTxi1lkSYcGvdfsvGd9BRLq62icLS0_xd7jXJNyCKKulPHv1oa7PU_9dDMi4Jm4t9WJiY9t0Wy5uuqjnx7oQL3fJwn6lVgH34IY3be5GPsvATPmZxbqpjM4Dg5V8hKP3Zy9DNp6hW5kMKfk3JiG1OukWIofxb_X2LxYw0ZjOl260eiQCQU99Wzd3nooWQf4zapaGPhynMiNaOnZVZ-EXt8wmTD5dVbSKEU5SWijo"/>
+</div>
+<div class="space-y-1">
+<div class="glass-surface p-md rounded-2xl rounded-tl-none space-y-3">
+<!-- Voice Waveform Placeholder -->
+<div class="bg-surface-container-highest rounded-xl p-3 flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-fixed text-on-primary-fixed hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="flex-1 h-8 flex items-center gap-1 overflow-hidden">
+<!-- Simple JS-less CSS animation for waveform feel -->
+<div class="w-1 h-3 bg-primary-fixed/40 rounded-full"></div>
+<div class="w-1 h-5 bg-primary-fixed/60 rounded-full"></div>
+<div class="w-1 h-2 bg-primary-fixed/40 rounded-full"></div>
+<div class="w-1 h-6 bg-primary-fixed rounded-full"></div>
+<div class="w-1 h-4 bg-primary-fixed/60 rounded-full"></div>
+<div class="w-1 h-7 bg-primary-fixed rounded-full"></div>
+<div class="w-1 h-3 bg-primary-fixed/40 rounded-full"></div>
+<div class="w-1 h-5 bg-primary-fixed/60 rounded-full"></div>
+<div class="w-1 h-8 bg-primary-fixed rounded-full"></div>
+<div class="w-1 h-4 bg-primary-fixed/60 rounded-full"></div>
+<div class="w-1 h-6 bg-primary-fixed rounded-full"></div>
+<div class="w-1 h-2 bg-primary-fixed/40 rounded-full"></div>
+<div class="w-1 h-5 bg-primary-fixed/60 rounded-full"></div>
+</div>
+<span class="text-label-sm font-label-sm text-primary-fixed">0:14</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface">Spot on with the macros. The salmon is a great choice for recovery. Keep that hydration up — aim for another 1L before dinner.</p>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant ml-1">01:05 PM</span>
+</div>
+</div>
+<!-- Form Check Instruction Card -->
+<div class="bg-surface-container-low border border-primary-fixed/10 rounded-2xl p-md flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed text-3xl" data-icon="fitness_center">fitness_center</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-label-md text-primary-fixed uppercase">Action Required</p>
+<p class="text-body-md font-body-md text-on-surface">Upload your Deadlift form check video from today's session.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</main>
+<!-- Message Input Bar -->
+<div class="fixed bottom-20 left-0 w-full px-margin-mobile pb-base pt-2 z-50">
+<div class="glass-surface p-2 rounded-full flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-body-md text-on-surface placeholder:text-on-surface-variant/50 px-2" placeholder="Message Coach Marcus..." type="text"/>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-fixed text-on-primary-fixed hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container border-t border-white/10 rounded-t-xl shadow-[0_-4px_10px_rgba(171,214,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="text-label-sm font-label-sm">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed bg-white/5 rounded-full px-4 py-1 scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="text-label-sm font-label-sm">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary-fixed transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for message bubbles
+        document.querySelectorAll('.glass-surface').forEach(bubble => {
+            bubble.addEventListener('touchstart', () => {
+                bubble.style.transform = 'scale(0.98)';
+                bubble.style.transition = 'transform 0.1s ease';
+            });
+            bubble.addEventListener('touchend', () => {
+                bubble.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple input focus behavior
+        const input = document.querySelector('input');
+        const micBtn = document.querySelector('[data-icon="mic"]');
+        
+        input.addEventListener('input', (e) => {
+            if (e.target.value.length > 0) {
+                micBtn.textContent = 'send';
+                micBtn.parentElement.setAttribute('data-icon', 'send');
+            } else {
+                micBtn.textContent = 'mic';
+                micBtn.parentElement.setAttribute('data-icon', 'mic');
+            }
+        });
+    </script>
+</body></html>

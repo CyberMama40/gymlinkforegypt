@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GymLink | Trainer Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#474649",
+                        "on-primary-container": "#556d00",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#c8c6c8",
+                        "surface-dim": "#121414",
+                        "secondary-fixed": "#e4e2e4",
+                        "on-secondary": "#303032",
+                        "tertiary": "#ffffff",
+                        "on-background": "#e2e2e2",
+                        "surface-container-highest": "#333535",
+                        "surface-container": "#1e2020",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-on-surface": "#2f3131",
+                        "surface-bright": "#37393a",
+                        "inverse-surface": "#e2e2e2",
+                        "on-surface": "#e2e2e2",
+                        "secondary": "#c8c6c8",
+                        "primary-fixed": "#c3f400",
+                        "on-error": "#690005",
+                        "primary": "#ffffff",
+                        "background": "#121414",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-tertiary": "#313030",
+                        "on-secondary-container": "#b6b4b7",
+                        "outline-variant": "#444933",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-container-low": "#1a1c1c",
+                        "surface": "#121414",
+                        "tertiary-fixed": "#e5e2e1",
+                        "inverse-primary": "#506600",
+                        "on-surface-variant": "#c4c9ac",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#656464",
+                        "on-secondary-fixed": "#1b1b1d",
+                        "primary-container": "#c3f400",
+                        "primary-fixed-dim": "#abd600",
+                        "tertiary-container": "#e5e2e1",
+                        "surface-container-high": "#282a2b",
+                        "on-primary": "#283500",
+                        "on-primary-fixed": "#161e00",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "surface-container-lowest": "#0c0f0f",
+                        "outline": "#8e9379",
+                        "secondary-container": "#474649",
+                        "surface-variant": "#333535",
+                        "surface-tint": "#abd600"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "margin-mobile": "20px",
+                        "md": "24px",
+                        "gutter": "16px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(44, 44, 46, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lime-glow {
+            box-shadow: 0 0 15px rgba(195, 244, 0, 0.2);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121414;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333535;
+            border-radius: 10px;
+        }
+
+        /* Entrance Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Delays */
+        .delay-1 { transition-delay: 100ms; }
+        .delay-2 { transition-delay: 200ms; }
+        .delay-3 { transition-delay: 300ms; }
+        .delay-4 { transition-delay: 400ms; }
+        .delay-5 { transition-delay: 500ms; }
+
+        /* Progress Bar Animation */
+        .progress-bar-fill {
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .visible .progress-bar-fill {
+            width: var(--progress-width);
+        }
+
+        /* Pulse Animation for Status Dots */
+        @keyframes status-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(195, 244, 0, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(195, 244, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(195, 244, 0, 0); }
+        }
+        .status-pulse-dot {
+            animation: status-pulse 2s infinite;
+        }
+
+        /* FAB Entrance */
+        @keyframes fab-pop {
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+            70% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        .fab-entrance {
+            animation: fab-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+            animation-delay: 800ms;
+        }
+
+        /* Micro-interactions */
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        .active-press:active {
+            transform: scale(0.96);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24 md:pb-0 overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface border-b border-white/10 docked full-width top-0 sticky z-50 transition-all duration-300">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed hover:opacity-80 transition-transform active:scale-95 cursor-pointer">
+<img alt="Trainer Profile" class="w-full h-full object-cover" data-alt="A professional fitness trainer with a confident expression, wearing high-performance athletic gear. The lighting is cinematic and high-contrast, typical of an elite gym environment. The background shows blurred gym equipment with hints of neon electric lime lighting against a dark slate-gray palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKMJJSeUrK216IFzculDBVPre0NB-Mmr8vKgxmRlO3a7O_qlBQCgc9ocDyYGQhmGnbRu49rswdJtsXn5MCKTJmTolIbjtXntHPklmJ8s59Kg0WinN__NvIoQzSSB59f2xIpqh0rK8vEX7clSdwQildMEQjPh9L-cca_bvCsmcPj7mQ2-p6M84ZNzKs-7QsvZtSt7KVdYdU5_eCk9TSLvO94mboDefd7JV-XiqQ41YxRuEtRMWE9kLwV17SVFgXmHjZII53s1Z7lko"/>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary">GymLink</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary dark:text-primary hover:opacity-80 transition-transform active:scale-95">settings</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl reveal visible">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary mb-xs">Active Clients</h2>
+<p class="text-on-surface-variant font-body-md">Managing 12 elite athletes today.</p>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed px-md py-sm rounded-lg font-bold flex items-center gap-xs hover:opacity-90 active-press transition-all lime-glow">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-label-md">Add Client</span>
+</button>
+</div>
+<!-- Dashboard Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Client List - 8 Columns -->
+<div class="md:col-span-8 space-y-gutter">
+<!-- Client Card 1 -->
+<div class="glass p-md rounded-xl reveal hover-lift active-press group">
+<div class="flex items-start justify-between mb-md">
+<div class="flex gap-md items-center">
+<div class="relative">
+<img alt="Sarah Connor" class="w-14 h-14 rounded-full object-cover border border-white/10" data-alt="Close-up portrait of a female athlete focused and determined, with soft sweat on her brow. The lighting is moody with cool blue and vibrant lime accents reflecting off her skin. The aesthetic is clean, professional, and athletic, fitting an elite sports brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn_iRq8mh-agN--fFQthKyvrSoY7aiEh5IfydEQs_KbafLPN271VC_B7I9mth6PPGttppBy5LOlfb6sK25H8ORR_eCXWyMi-mS3vuKjoyVS0lT1Wsl49gBu-PIvOl_KTtX6BEba6Z4C0zIAsQ2BX6hE6PEjizzgJUCtztzZALz8QW8zIboKqZPWrbhW3TfXO8_-njehEXeGbYWzQfH7P9BBQaFDKjhDUb0xhiU1EaQgLYOw2kMoznWmTW44qvCeb93QJJ96c6IFoI"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-primary-fixed rounded-full border-2 border-surface status-pulse-dot"></span>
+</div>
+<div>
+<h3 class="text-body-lg font-semibold text-primary">Sarah Connor</h3>
+<p class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-wider">LAST: HEAVY LEGS • 2H AGO</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-xs reveal delay-1">
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface-variant">WEEKLY PROGRESS</span>
+<span class="text-primary-fixed font-bold">82%</span>
+</div>
+<div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed rounded-full progress-bar-fill" style="--progress-width: 82%"></div>
+</div>
+</div>
+</div>
+<!-- Client Card 2 -->
+<div class="glass p-md rounded-xl reveal delay-1 hover-lift active-press group">
+<div class="flex items-start justify-between mb-md">
+<div class="flex gap-md items-center">
+<div class="relative">
+<img alt="Marcus Aurelius" class="w-14 h-14 rounded-full object-cover border border-white/10" data-alt="A fit male athlete in his mid-30s in a dark gym environment. He is wearing high-quality compression gear. Subtle lime green light tubes are visible in the background, creating a high-energy, technical atmosphere. Professional sports photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBZK3JCoCWGqcI_zWUtVL3535TAUeHsEsYabp9DTOXTaM3dyfO9uDlmpKuILAfmRqJnoOP2lSEGFr0akc4oetMjVOdcqJ1O9WVO2Uto3OMoM8a1bwZdCVbnvqLu534A0YfusSujyK_mNpSVrp9QRMM4u5tZ2YbqqhHepN9KbQd5Kqwbx5YOC0Y2BL6PQwa4CC81J1FUgg-SrVOpHwqqcpwJAjBLyiVQqVa7rEkno6NiLPxqKDpYsKs4_AvGdMBm5dcNBqTJYho2Eg"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-on-surface-variant rounded-full border-2 border-surface"></span>
+</div>
+<div>
+<h3 class="text-body-lg font-semibold text-primary">Marcus Aurelius</h3>
+<p class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-wider">LAST: UPPER PUSH • 1D AGO</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-xs reveal delay-2">
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface-variant">WEEKLY PROGRESS</span>
+<span class="text-primary-fixed font-bold">45%</span>
+</div>
+<div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed rounded-full progress-bar-fill" style="--progress-width: 45%"></div>
+</div>
+</div>
+</div>
+<!-- Client Card 3 -->
+<div class="glass p-md rounded-xl reveal delay-2 hover-lift active-press group">
+<div class="flex items-start justify-between mb-md">
+<div class="flex gap-md items-center">
+<div class="relative">
+<img alt="Elena Rodriguez" class="w-14 h-14 rounded-full object-cover border border-white/10" data-alt="Portrait of a young female track athlete standing against a dark architectural wall. She has a sharp, focused gaze. The image is graded with deep blacks and vibrant electric lime highlights on her athletic apparel. Ultra-modern, premium fitness aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIBvFeETULEU72s70FCiPYekJ2YxaPHpZQDnDQYXz5eXvid21FmbUK6nMdMf5rgC1dPfSXf2T7_XPOCS27C1pyf3a6n7PDKflP37CxMvmeaJketrNM_qRLEHsno65oNdoCKDuJv4WFswu1wNUiDGV1HSJp6qg3A70rck6ze4V-carqlGUkcc1PHDbVY3QePd5FMk34BWJBR169STUmSCACh2jobm6YoI58Xnr_Qc9CPgAx5lFt3IVFL2cF-ODz4FE6j74T_Kbm5wc"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-primary-fixed rounded-full border-2 border-surface status-pulse-dot"></span>
+</div>
+<div>
+<h3 class="text-body-lg font-semibold text-primary">Elena Rodriguez</h3>
+<p class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-wider">LAST: RECOVERY YOGA • 4H AGO</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-xs reveal delay-3">
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface-variant">WEEKLY PROGRESS</span>
+<span class="text-primary-fixed font-bold">95%</span>
+</div>
+<div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed rounded-full progress-bar-fill" style="--progress-width: 95%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Metrics - 4 Columns -->
+<div class="md:col-span-4 space-y-gutter">
+<div class="glass p-md rounded-xl reveal delay-3">
+<h4 class="text-label-md font-label-md text-primary-fixed mb-md">COACH PERFORMANCE</h4>
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-md">Total Active</span>
+<span class="font-label-md text-primary text-lg">12</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-body-md">Compliance</span>
+<span class="font-label-md text-primary text-lg">92%</span>
+</div>
+<div class="pt-sm border-t border-white/5">
+<div class="flex justify-between text-label-sm mb-2">
+<span class="text-on-surface-variant">MONTHLY TARGET</span>
+<span class="text-primary-fixed">12 / 15</span>
+</div>
+<div class="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed progress-bar-fill" style="--progress-width: 80%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Feed Mini -->
+<div class="glass p-md rounded-xl reveal delay-4">
+<h4 class="text-label-md font-label-md text-primary-fixed mb-md">RECENT ACTIONS</h4>
+<div class="space-y-md">
+<div class="flex gap-sm items-start hover:translate-x-1 transition-transform cursor-pointer">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">check_circle</span>
+</div>
+<div>
+<p class="text-body-md text-primary leading-tight">Sarah logged PR</p>
+<p class="text-label-sm text-on-surface-variant">Squat: 105kg x 5</p>
+</div>
+</div>
+<div class="flex gap-sm items-start hover:translate-x-1 transition-transform cursor-pointer">
+<div class="w-8 h-8 rounded bg-on-surface-variant/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">chat</span>
+</div>
+<div>
+<p class="text-body-md text-primary leading-tight">Marcus sent a message</p>
+<p class="text-label-sm text-on-surface-variant">"Lower back feels tight..."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container dark:bg-surface-container border-t border-white/10 shadow-[0_-4px_10px_rgba(171,214,0,0.1)] rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center text-primary-fixed dark:text-primary-fixed bg-white/5 rounded-full px-4 py-1 scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-primary-fixed hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="text-label-sm font-label-sm">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-primary-fixed hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-label-sm font-label-sm">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-primary-fixed hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Interactive Layer: FAB for Mobile -->
+<button class="fixed right-6 bottom-24 md:hidden w-14 h-14 bg-primary-fixed text-on-primary-fixed rounded-full flex items-center justify-center shadow-lg lime-glow active-press hover-lift fab-entrance z-50">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+<script>
+        // Trigger entrance animations after DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            // Short timeout to ensure initial paint before starting animation
+            setTimeout(() => {
+                reveals.forEach(el => el.classList.add('visible'));
+            }, 50);
+        });
+
+        // Scroll behavior for header
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body></html>

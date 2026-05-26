@@ -1,0 +1,19 @@
+# GymLink: Personalized Fitness Coaching App
+
+## Overview
+A dual-sided platform connecting personal trainers with clients. The app focuses on hyper-personalized workout plans and direct human communication.
+
+## Core Features
+1. **Trainer Dashboard:** Manage multiple clients, track their compliance, and see real-time results.
+2. **Personalized Client View:** Each client sees only their specific plan, curated by their trainer.
+3. **Interactive Messaging:** Built-in chat for text, photos, and video feedback to maintain 'human presence'.
+4. **Workout Logging:** Simple interface for clients to log sets, reps, and feelings, which the trainer can immediately review.
+
+## User Personas
+- **The Trainer:** Professional coach looking for a streamlined way to manage 20+ clients and maintain high-touch relationships.
+- **The Client:** Gym-goer who wants expert guidance and accountability without a generic template.
+
+## Visual Identity
+- **Keywords:** Professional, Energetic, Human, Precise.
+- **Theme:** Dark Mode by default for a modern 'gym' feel.
+- **Accents:** High-contrast lime green for primary actions.

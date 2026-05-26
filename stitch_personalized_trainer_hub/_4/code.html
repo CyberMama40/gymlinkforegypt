@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GymLink Program Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #121414;
+            color: #e2e2e2;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(44, 44, 46, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lime-glow:focus-within {
+            box-shadow: 0 0 15px rgba(195, 244, 0, 0.15);
+            border-color: #c3f400;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#474649",
+                      "on-primary-container": "#556d00",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#c8c6c8",
+                      "surface-dim": "#121414",
+                      "secondary-fixed": "#e4e2e4",
+                      "on-secondary": "#303032",
+                      "tertiary": "#ffffff",
+                      "on-background": "#e2e2e2",
+                      "surface-container-highest": "#333535",
+                      "surface-container": "#1e2020",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "inverse-on-surface": "#2f3131",
+                      "surface-bright": "#37393a",
+                      "inverse-surface": "#e2e2e2",
+                      "on-surface": "#e2e2e2",
+                      "secondary": "#c8c6c8",
+                      "primary-fixed": "#c3f400",
+                      "on-error": "#690005",
+                      "primary": "#ffffff",
+                      "background": "#121414",
+                      "on-tertiary-fixed-variant": "#474646",
+                      "on-tertiary": "#313030",
+                      "on-secondary-container": "#b6b4b7",
+                      "outline-variant": "#444933",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "surface-container-low": "#1a1c1c",
+                      "surface": "#121414",
+                      "tertiary-fixed": "#e5e2e1",
+                      "inverse-primary": "#506600",
+                      "on-surface-variant": "#c4c9ac",
+                      "on-error-container": "#ffdad6",
+                      "error": "#ffb4ab",
+                      "on-tertiary-container": "#656464",
+                      "on-secondary-fixed": "#1b1b1d",
+                      "primary-container": "#c3f400",
+                      "primary-fixed-dim": "#abd600",
+                      "tertiary-container": "#e5e2e1",
+                      "surface-container-high": "#282a2b",
+                      "on-primary": "#283500",
+                      "on-primary-fixed": "#161e00",
+                      "on-primary-fixed-variant": "#3c4d00",
+                      "surface-container-lowest": "#0c0f0f",
+                      "outline": "#8e9379",
+                      "secondary-container": "#474649",
+                      "surface-variant": "#333535",
+                      "surface-tint": "#abd600"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "48px",
+                      "sm": "12px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "lg": "40px",
+                      "margin-mobile": "20px",
+                      "md": "24px",
+                      "gutter": "16px",
+                      "xl": "64px"
+              },
+              "fontFamily": {
+                      "body-md": ["Hanken Grotesk"],
+                      "headline-lg": ["Sora"],
+                      "headline-md": ["Sora"],
+                      "headline-lg-mobile": ["Sora"],
+                      "display-lg": ["Sora"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "label-md": ["JetBrains Mono"],
+                      "label-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<!-- Top Navigation Header -->
+<header class="sticky top-0 z-40 bg-surface flex justify-between items-center px-margin-mobile py-base w-full border-b border-white/10 md:px-margin-desktop">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img alt="Trainer Profile" data-alt="A professional fitness trainer with an athletic build and focused expression, standing in a high-tech modern gym. The lighting is cinematic with deep shadows and Electric Lime neon accents. He wears premium charcoal athletic apparel, embodying the elite coaching brand identity of GymLink. The atmosphere is professional, sleek, and high-performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGTGJLW1iBI-fU8JBm8UzY8u-kfXIHKlHkxqKXkIqvcKtgvWP0qTseW7PMjltlkeKChF7JgzUyNe7gqlQ0AAs_RDxhgSs7SbYCGe9sm6uDcyfpTUwtNRmc-6MPU9xHSYCsM014tKqrlLFFHqgQR8RAq3cA2tjz_hDDHWPu_hrSl3wsQWvK8ihBvJMR0jrn73OdStHhI30ER-tuxyriG9ez8Dqe5G2Kv6CmQ-OsP1qGY0OBmprN168b7BmMXRlmTk2CLCjKtZhFttQ"/>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">GymLink</h1>
+</div>
+<div class="flex items-center gap-gutter">
+<button class="material-symbols-outlined text-primary hover:opacity-80 active:scale-95 transition-transform" data-icon="settings">settings</button>
+</div>
+</header>
+<main class="min-h-screen pb-32">
+<!-- Hero Search Section -->
+<section class="px-margin-mobile pt-lg pb-md md:px-margin-desktop max-w-5xl mx-auto">
+<div class="mb-lg">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg mb-xs">Program Builder</h2>
+<p class="text-on-surface-variant font-body-md">Designing high-octane plan for <span class="text-primary-fixed font-semibold">Alex Rivera</span></p>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-high border border-outline/20 rounded-xl py-4 pl-12 pr-4 font-body-md text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary-fixed focus:border-primary-fixed transition-all lime-glow outline-none" placeholder="Search exercise library (e.g. Deadlift, HIIT, Mobility)..." type="text"/>
+</div>
+</section>
+<!-- Builder Workspace -->
+<section class="px-margin-mobile md:px-margin-desktop max-w-5xl mx-auto">
+<div class="flex items-center justify-between mb-md">
+<h3 class="text-label-md font-label-md uppercase tracking-widest text-on-surface-variant">Active Workout Session</h3>
+<span class="text-label-sm font-label-sm text-primary-fixed bg-primary-fixed/10 px-3 py-1 rounded-full">4 Exercises Added</span>
+</div>
+<!-- Exercise List - Bento Style Layout -->
+<div class="grid grid-cols-1 gap-gutter">
+<!-- Exercise Card 1 -->
+<div class="glass-panel p-md rounded-xl group hover:border-primary-fixed/30 transition-all duration-300">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-md">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-container-highest overflow-hidden relative">
+<img alt="Squat" data-alt="Close up action shot of a person performing a heavy barbell back squat in a gritty industrial gym setting. The lighting is low-key with a single bright spotlight creating dramatic highlights. The scene uses a deep charcoal and slate gray color palette, emphasizing the raw power and athletic precision required for the movement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_kA8fGEQ0ywbk-YI0tg-zYFs0uOHspi981UMiJy9tmUKsi6-bWBAKbYoumQzvgunhL2Q5ZkFsth3Aiit4-aafmXbO8XHhctnsphX9fwQZX8bUv3haXXSlN8c1hPVhuHXNtnWKRkVgKhvckoXEShWA5ByYpdZoOJ00rMT0O61VqKFUJRTKhIphOLIhOtPO5M3IgosTPOzie2TwLMwg9QNKFmzaQmjFcWGXJqt3TSHFUUaMYdccTLHuOwQ5ueFmCloPLG4pzNigIfI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest to-transparent opacity-40"></div>
+</div>
+<div>
+<h4 class="text-body-lg font-semibold text-primary">Barbell Back Squat</h4>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Strength • Compound</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="p-2 hover:bg-white/5 rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">drag_handle</span></button>
+<button class="p-2 hover:bg-red-500/10 rounded-lg text-error transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-md">
+<div class="space-y-1">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Sets</label>
+<input class="w-full bg-surface-container-low border border-outline/10 rounded-lg py-2 px-3 font-label-md text-primary-fixed focus:border-primary-fixed outline-none" type="number" value="4"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Reps</label>
+<input class="w-full bg-surface-container-low border border-outline/10 rounded-lg py-2 px-3 font-label-md text-primary-fixed focus:border-primary-fixed outline-none" type="number" value="8"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Weight (kg)</label>
+<input class="w-full bg-surface-container-low border border-outline/10 rounded-lg py-2 px-3 font-label-md text-primary-fixed focus:border-primary-fixed outline-none" type="number" value="120"/>
+</div>
+</div>
+</div>
+<!-- Exercise Card 2 -->
+<div class="glass-panel p-md rounded-xl group hover:border-primary-fixed/30 transition-all duration-300">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-md">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-container-highest overflow-hidden relative">
+<img alt="Bench Press" data-alt="A side view of a focused athlete performing a bench press with heavy plates in a modern professional training facility. The lighting is crisp, highlighting muscular definition and the polished metallic surface of the barbell. The background is a clean, dark slate gray, following the Corporate Modern aesthetic of the GymLink brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDznC6cH0C6hiw36lhoU3Xt1MNTsdPhEe_vJJGH48plVBFRojrJ33fCu_sG3xpToy9H5CMjuO_7Oo6g3Z4Q0XDTWzbvLggfIhGJ7dnSzaZoY_cmCXtOLi2CBlE2hB7mjM0yortOabFVCPF6WX20pjvT6xiJFo1JNs48NQeSFExNtJOOVASkTCs2CVpZ6YJtGZrI4GvipdgB4-91uDdew-TOz242OJwtGLTFyG-PV5vetLr9pSvfCnVjlV2imu8FmqtS1y4GTgLRsjs"/>
+</div>
+<div>
+<h4 class="text-body-lg font-semibold text-primary">Incline DB Press</h4>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Strength • Hypertrophy</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="p-2 hover:bg-white/5 rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">drag_handle</span></button>
+<button class="p-2 hover:bg-red-500/10 rounded-lg text-error transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-md">
+<div class="space-y-1">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Sets</label>
+<input class="w-full bg-surface-container-low border border-outline/10 rounded-lg py-2 px-3 font-label-md text-primary-fixed focus:border-primary-fixed outline-none" placeholder="3" type="number"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Reps</label>
+<input class="w-full bg-surface-container-low border border-outline/10 rounded-lg py-2 px-3 font-label-md text-primary-fixed focus:border-primary-fixed outline-none" placeholder="12" type="number"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Weight (kg)</label>
+<input class="w-full bg-surface-container-low border border-outline/10 rounded-lg py-2 px-3 font-label-md text-primary-fixed focus:border-primary-fixed outline-none" placeholder="32" type="number"/>
+</div>
+</div>
+</div>
+<!-- Empty State/Add Button -->
+<button class="border-2 border-dashed border-outline/20 rounded-xl p-xl flex flex-col items-center justify-center gap-base group hover:border-primary-fixed/50 transition-all">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-fixed transition-colors">add_circle</span>
+<span class="text-label-md text-on-surface-variant group-hover:text-primary-fixed">Browse Library</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar / Nav -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<!-- Floating Save Action -->
+<div class="absolute bottom-24 left-1/2 -translate-x-1/2 w-full max-w-md px-margin-mobile">
+<button class="w-full bg-primary-fixed text-on-primary-fixed py-4 rounded-xl font-bold flex items-center justify-center gap-base shadow-[0_0_30px_rgba(195,244,0,0.3)] hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">save</span>
+                SAVE TRAINING PLAN
+            </button>
+</div>
+<!-- Global Navigation -->
+<nav class="bg-surface-container border-t border-white/10 px-4 pb-4 pt-2 flex justify-around items-center rounded-t-xl shadow-[0_-4px_10px_rgba(171,214,0,0.1)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed bg-white/5 rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="text-label-sm font-label-sm">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-label-sm font-label-sm">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+</div>
+<!-- Quick Micro-interaction Script -->
+<script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('border-primary-fixed/20');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('border-primary-fixed/20');
+            });
+        });
+
+        // Simple button click ripple effect or scale
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 150);
+            });
+        });
+    </script>
+</body></html>
