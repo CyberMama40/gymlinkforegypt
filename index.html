@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="ru">
+<html class="dark" lang="en" dir="ltr">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -49,6 +49,26 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
     .tag { font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Language switcher ── */
+    .lang-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+      color: #8e9379;
+      letter-spacing: 0.05em;
+    }
+    .lang-btn:hover {
+      color: #c4c9ac;
+    }
+    .lang-btn.active {
+      background-color: #c3f400;
+      color: #283500;
+      box-shadow: 0 0 14px rgba(195, 244, 0, 0.55);
+    }
   </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen">
@@ -62,7 +82,13 @@
         </div>
         <h1 class="text-xl font-bold text-primary" style="font-family: Sora, sans-serif">GymLink</h1>
       </div>
-      <span class="tag text-xs text-on-surface-variant border border-outline rounded-full px-3 py-1">v0.1.0 — UI Prototype</span>
+
+      <!-- Language Switcher (replaces v0.1.0 tag) -->
+      <div class="flex items-center gap-0.5 p-1 rounded-full border border-white/10 bg-surface-container">
+        <button type="button" id="lang-en" class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button type="button" id="lang-ar" class="lang-btn"        onclick="setLang('ar')">AR</button>
+        <button type="button" id="lang-ru" class="lang-btn"        onclick="setLang('ru')">RU</button>
+      </div>
     </div>
   </header>
 
@@ -70,13 +96,13 @@
   <section class="max-w-6xl mx-auto px-6 pt-16 pb-12 text-center">
     <div class="inline-flex items-center gap-2 bg-primary-fixed/10 border border-primary-fixed/20 rounded-full px-4 py-1.5 mb-6">
       <span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
-      <span class="tag text-xs text-primary-fixed">ПЕРСОНАЛИЗИРОВАННЫЙ ФИТНЕС-КОУЧИНГ</span>
+      <span class="tag text-xs text-primary-fixed" data-i18n="tagline">PERSONALIZED FITNESS COACHING</span>
     </div>
     <h2 class="text-5xl font-extrabold text-primary mb-4 leading-tight" style="font-family: Sora, sans-serif; letter-spacing: -0.02em">
       Trainer &amp; Client<br/>Platform
     </h2>
-    <p class="text-on-surface-variant text-lg max-w-xl mx-auto">
-      Двусторонняя платформа, соединяющая тренеров с клиентами. Персональные планы, отслеживание прогресса и живое общение.
+    <p class="text-on-surface-variant text-lg max-w-xl mx-auto" data-i18n="hero-subtitle">
+      A dual-sided platform connecting trainers with clients. Personalized plans, progress tracking, and direct human communication.
     </p>
   </section>
 
@@ -87,7 +113,7 @@
     <div class="mb-10">
       <div class="flex items-center gap-3 mb-5">
         <span class="material-symbols-outlined text-primary-fixed">manage_accounts</span>
-        <h3 class="text-sm font-semibold text-primary-fixed tag tracking-widest">ТРЕНЕР</h3>
+        <h3 class="text-sm font-semibold text-primary-fixed tag tracking-widest" data-i18n="section-trainer">TRAINER</h3>
         <div class="flex-1 h-px bg-white/10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -96,14 +122,14 @@
           <div class="relative h-44 overflow-hidden">
             <img src="stitch_personalized_trainer_hub/_1/screen.png" alt="Trainer Dashboard" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 1</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-1">SCREEN 1</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Trainer Dashboard</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-1">Trainer Dashboard</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Список клиентов, прогресс, активность</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-1">Client list, progress, activity feed</p>
           </div>
         </a>
 
@@ -111,14 +137,14 @@
           <div class="relative h-44 overflow-hidden">
             <img src="stitch_personalized_trainer_hub/_4/screen.png" alt="Program Builder" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 4</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-4">SCREEN 4</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Program Builder</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-4">Program Builder</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Создание тренировочных программ</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-4">Create custom training programs</p>
           </div>
         </a>
 
@@ -126,14 +152,14 @@
           <div class="relative h-44 overflow-hidden">
             <img src="stitch_personalized_trainer_hub/_5/screen.png" alt="Trainer Dashboard v2" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 5</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-5">SCREEN 5</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Dashboard v2</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-5">Dashboard v2</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Альтернативный вид дашборда</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-5">Alternative dashboard view</p>
           </div>
         </a>
 
@@ -144,7 +170,7 @@
     <div class="mb-10">
       <div class="flex items-center gap-3 mb-5">
         <span class="material-symbols-outlined text-primary-fixed">person</span>
-        <h3 class="text-sm font-semibold text-primary-fixed tag tracking-widest">КЛИЕНТ</h3>
+        <h3 class="text-sm font-semibold text-primary-fixed tag tracking-widest" data-i18n="section-client">CLIENT</h3>
         <div class="flex-1 h-px bg-white/10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -153,44 +179,44 @@
           <div class="relative h-44 overflow-hidden">
             <img src="stitch_personalized_trainer_hub/_2/screen.png" alt="Client Home" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 2</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-2">SCREEN 2</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Client Home</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-2">Client Home</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Главный экран клиента</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-2">Client's personalized main screen</p>
           </div>
         </a>
 
         <a href="stitch_personalized_trainer_hub/_3/code.html" class="glass rounded-2xl overflow-hidden card-hover block">
           <div class="relative h-44 overflow-hidden">
-            <img src="stitch_personalized_trainer_hub/_3/screen.png" alt="Screen 3" class="w-full h-full object-cover object-top opacity-80"/>
+            <img src="stitch_personalized_trainer_hub/_3/screen.png" alt="Workout View" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 3</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-3">SCREEN 3</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Workout View</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-3">Workout View</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Детали тренировки</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-3">Workout session details</p>
           </div>
         </a>
 
         <a href="stitch_personalized_trainer_hub/_6/code.html" class="glass rounded-2xl overflow-hidden card-hover block">
           <div class="relative h-44 overflow-hidden">
-            <img src="stitch_personalized_trainer_hub/_6/screen.png" alt="Screen 6" class="w-full h-full object-cover object-top opacity-80"/>
+            <img src="stitch_personalized_trainer_hub/_6/screen.png" alt="Progress Screen" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 6</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-6">SCREEN 6</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Progress Screen</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-6">Progress Screen</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Прогресс и аналитика</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-6">Progress tracking and analytics</p>
           </div>
         </a>
 
@@ -201,23 +227,23 @@
     <div>
       <div class="flex items-center gap-3 mb-5">
         <span class="material-symbols-outlined text-primary-fixed">apps</span>
-        <h3 class="text-sm font-semibold text-primary-fixed tag tracking-widest">ОБЩИЕ ЭКРАНЫ</h3>
+        <h3 class="text-sm font-semibold text-primary-fixed tag tracking-widest" data-i18n="section-shared">SHARED SCREENS</h3>
         <div class="flex-1 h-px bg-white/10"></div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
         <a href="stitch_personalized_trainer_hub/_7/code.html" class="glass rounded-2xl overflow-hidden card-hover block">
           <div class="relative h-44 overflow-hidden">
-            <img src="stitch_personalized_trainer_hub/_7/screen.png" alt="Screen 7" class="w-full h-full object-cover object-top opacity-80"/>
+            <img src="stitch_personalized_trainer_hub/_7/screen.png" alt="Messaging" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 7</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-7">SCREEN 7</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Messaging</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-7">Messaging</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Чат тренер-клиент</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-7">Trainer-client chat</p>
           </div>
         </a>
 
@@ -225,14 +251,14 @@
           <div class="relative h-44 overflow-hidden">
             <img src="stitch_personalized_trainer_hub/_8/screen.png" alt="Exercise Library" class="w-full h-full object-cover object-top opacity-80"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed">ЭКРАН 8</span>
+            <span class="absolute bottom-3 left-4 tag text-xs text-primary-fixed" data-i18n="label-8">SCREEN 8</span>
           </div>
           <div class="p-4">
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-semibold text-primary" style="font-family: Sora">Библиотека Упражнений</h4>
+              <h4 class="font-semibold text-primary" style="font-family: Sora" data-i18n="title-8">Exercise Library</h4>
               <span class="material-symbols-outlined text-on-surface-variant text-base">arrow_forward</span>
             </div>
-            <p class="text-sm text-on-surface-variant">Поиск и фильтрация упражнений</p>
+            <p class="text-sm text-on-surface-variant" data-i18n="desc-8">Search and filter exercises</p>
           </div>
         </a>
 
@@ -251,6 +277,88 @@
       </div>
     </div>
   </footer>
+
+  <!-- ══════════════════════════════════════════════
+       i18n — Translations & Language Switcher
+  ══════════════════════════════════════════════ -->
+  <script>
+    const translations = {
+      en: {
+        "tagline":         "PERSONALIZED FITNESS COACHING",
+        "hero-subtitle":   "A dual-sided platform connecting trainers with clients. Personalized plans, progress tracking, and direct human communication.",
+        "section-trainer": "TRAINER",
+        "section-client":  "CLIENT",
+        "section-shared":  "SHARED SCREENS",
+        "label-1": "SCREEN 1", "title-1": "Trainer Dashboard",  "desc-1": "Client list, progress, activity feed",
+        "label-2": "SCREEN 2", "title-2": "Client Home",         "desc-2": "Client's personalized main screen",
+        "label-3": "SCREEN 3", "title-3": "Workout View",        "desc-3": "Workout session details",
+        "label-4": "SCREEN 4", "title-4": "Program Builder",     "desc-4": "Create custom training programs",
+        "label-5": "SCREEN 5", "title-5": "Dashboard v2",        "desc-5": "Alternative dashboard view",
+        "label-6": "SCREEN 6", "title-6": "Progress Screen",     "desc-6": "Progress tracking and analytics",
+        "label-7": "SCREEN 7", "title-7": "Messaging",           "desc-7": "Trainer-client chat",
+        "label-8": "SCREEN 8", "title-8": "Exercise Library",    "desc-8": "Search and filter exercises",
+      },
+      ru: {
+        "tagline":         "ПЕРСОНАЛИЗИРОВАННЫЙ ФИТНЕС-КОУЧИНГ",
+        "hero-subtitle":   "Двусторонняя платформа, соединяющая тренеров с клиентами. Персональные планы, отслеживание прогресса и живое общение.",
+        "section-trainer": "ТРЕНЕР",
+        "section-client":  "КЛИЕНТ",
+        "section-shared":  "ОБЩИЕ ЭКРАНЫ",
+        "label-1": "ЭКРАН 1", "title-1": "Панель тренера",           "desc-1": "Список клиентов, прогресс, активность",
+        "label-2": "ЭКРАН 2", "title-2": "Главная клиента",          "desc-2": "Персональный главный экран клиента",
+        "label-3": "ЭКРАН 3", "title-3": "Просмотр тренировки",      "desc-3": "Детали тренировочной сессии",
+        "label-4": "ЭКРАН 4", "title-4": "Конструктор программ",     "desc-4": "Создание тренировочных программ",
+        "label-5": "ЭКРАН 5", "title-5": "Панель управления v2",     "desc-5": "Альтернативный вид дашборда",
+        "label-6": "ЭКРАН 6", "title-6": "Экран прогресса",          "desc-6": "Отслеживание прогресса и аналитика",
+        "label-7": "ЭКРАН 7", "title-7": "Сообщения",                "desc-7": "Чат тренер-клиент",
+        "label-8": "ЭКРАН 8", "title-8": "Библиотека упражнений",    "desc-8": "Поиск и фильтрация упражнений",
+      },
+      ar: {
+        "tagline":         "تدريب لياقة بدنية شخصي",
+        "hero-subtitle":   "منصة ثنائية الجانب تربط المدربين بالعملاء. خطط شخصية، تتبع التقدم، والتواصل المباشر.",
+        "section-trainer": "المدرب",
+        "section-client":  "العميل",
+        "section-shared":  "الشاشات المشتركة",
+        "label-1": "شاشة ١", "title-1": "لوحة المدرب",           "desc-1": "قائمة العملاء والتقدم والنشاط",
+        "label-2": "شاشة ٢", "title-2": "الصفحة الرئيسية",       "desc-2": "الشاشة الرئيسية الشخصية للعميل",
+        "label-3": "شاشة ٣", "title-3": "عرض التمرين",           "desc-3": "تفاصيل جلسة التدريب",
+        "label-4": "شاشة ٤", "title-4": "منشئ البرامج",          "desc-4": "إنشاء برامج تدريبية مخصصة",
+        "label-5": "شاشة ٥", "title-5": "لوحة التحكم v2",        "desc-5": "عرض بديل للوحة التحكم",
+        "label-6": "شاشة ٦", "title-6": "شاشة التقدم",           "desc-6": "تتبع التقدم والتحليلات",
+        "label-7": "شاشة ٧", "title-7": "المراسلة",              "desc-7": "دردشة المدرب والعميل",
+        "label-8": "شاشة ٨", "title-8": "مكتبة التمارين",        "desc-8": "البحث وتصفية التمارين",
+      }
+    }
+
+    function setLang(lang) {
+      const t = translations[lang]
+      if (!t) return
+
+      // 1. Apply all text translations
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n')
+        if (t[key] !== undefined) el.textContent = t[key]
+      })
+
+      // 2. Set html lang + direction (RTL for Arabic)
+      document.documentElement.lang = lang
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+
+      // 3. Update active button style
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active')
+      })
+      const activeBtn = document.getElementById('lang-' + lang)
+      if (activeBtn) activeBtn.classList.add('active')
+
+      // 4. Save preference
+      localStorage.setItem('gymlink-lang', lang)
+    }
+
+    // Load saved language on page start
+    const savedLang = localStorage.getItem('gymlink-lang') || 'en'
+    setLang(savedLang)
+  </script>
 
 </body>
 </html>
