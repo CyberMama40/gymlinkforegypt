@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import { AppLayout } from './components/shared/app-layout'
+import { supabase } from './lib/supabase-client'
 import { WelcomeScreen } from './components/shared/welcome-screen'
 import { RoleSelectScreen } from './components/shared/role-select-screen'
 import { TrainerOnboardingScreen } from './components/shared/trainer-onboarding-screen'
@@ -32,6 +34,15 @@ function Profile() {
 }
 
 function App() {
+  // Smoke-test: verifies Supabase client initialises without throwing.
+  // TODO: remove once real auth flow is wired up.
+  useEffect(() => {
+    supabase.auth.getSession().then(({ error }) => {
+      if (error) console.error('[supabase smoke-test]', error.message)
+      else        console.info('[supabase smoke-test] client OK')
+    })
+  }, [])
+
   return (
     <BrowserRouter>
       <Routes>
