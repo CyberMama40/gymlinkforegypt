@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
 import { AppLayout } from './components/shared/app-layout'
+import { WelcomeScreen } from './components/shared/welcome-screen'
+import { RoleSelectScreen } from './components/shared/role-select-screen'
 
 // Stub screens — real screens will be built separately
 function Home() {
@@ -30,11 +32,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+        {/* ── Onboarding flow — no app-bar / bottom-nav ── */}
+        <Route path="/welcome" element={<WelcomeScreen />} />
+        <Route path="/role"    element={<RoleSelectScreen />} />
+
+        {/* ── Main app — with AppLayout (app-bar + bottom-nav) ── */}
         <Route element={<AppLayout />}>
-          <Route index element={<Home />} />
-          <Route path="search" element={<Search />} />
+          <Route index          element={<Home />}    />
+          <Route path="search"  element={<Search />}  />
           <Route path="profile" element={<Profile />} />
         </Route>
+
       </Routes>
     </BrowserRouter>
   )
