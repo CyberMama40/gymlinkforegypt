@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { useLang, getDir, type Lang } from '../../stores/use-lang'
 
 // Temporary inline dictionary — will be replaced by proper i18n
@@ -9,14 +10,19 @@ const copy: Record<Lang, { title: string; trainer: string; client: string }> = {
 }
 
 export function RoleSelectScreen() {
-  const lang = useLang((s) => s.lang)
-  const t    = copy[lang]
+  const lang     = useLang((s) => s.lang)
+  const navigate = useNavigate()
+  const t        = copy[lang]
 
   // Outside AppLayout — apply RTL effect locally
   useEffect(() => {
     document.documentElement.dir  = getDir(lang)
     document.documentElement.lang = lang
   }, [lang])
+
+  function handleSelectTrainer() {
+    navigate('/trainer')
+  }
 
   return (
     <div className="min-h-screen bg-tertiary flex flex-col items-center justify-center gap-10 ps-6 pe-6">
@@ -27,10 +33,10 @@ export function RoleSelectScreen() {
 
       <div className="flex flex-col gap-4 w-full max-w-sm">
 
-        {/* Trainer button — primary style */}
+        {/* Trainer button — navigates to /trainer onboarding */}
         <button
           type="button"
-          onClick={() => console.log('trainer selected')}
+          onClick={handleSelectTrainer}
           className="w-full bg-primary text-tertiary font-label font-bold text-base py-4 rounded-xl tracking-wide"
         >
           {t.trainer}
