@@ -1,5 +1,34 @@
+/* 1. Google Fonts — must come before @import "tailwindcss" */
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap");
+
+/* 2. Tailwind CSS v4 */
 @import "tailwindcss";
 
+/* 3. Design tokens — High-Performance Kinetic */
 @theme {
-  /* Design tokens will be added here */
+  /* Colors */
+  --color-primary:   #CCFF00;
+  --color-secondary: #2C2C2E;
+  --color-tertiary:  #121212;
+  --color-neutral:   #FFFFFF;
+
+  /* Fonts */
+  --font-headline: "Sora", sans-serif;
+  --font-body:     "Hanken Grotesk", sans-serif;
+  --font-label:    "JetBrains Mono", monospace;
+  --font-arabic:   "IBM Plex Sans Arabic", sans-serif;
+}
+
+/* 4. Base document styles */
+body {
+  background-color: var(--color-tertiary);
+  color: var(--color-neutral);
+  font-family: var(--font-body);
+}
+
+[dir="rtl"] body {
+  font-family: var(--font-arabic);
 }
