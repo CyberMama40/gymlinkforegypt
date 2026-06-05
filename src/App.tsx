@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import { AppLayout } from './components/shared/app-layout'
 import { WelcomeScreen } from './components/shared/welcome-screen'
 import { RoleSelectScreen } from './components/shared/role-select-screen'
@@ -33,13 +33,16 @@ function App() {
     <BrowserRouter>
       <Routes>
 
+        {/* ── Root redirect — "/" always goes to welcome ── */}
+        <Route path="/" element={<Navigate to="/welcome" replace />} />
+
         {/* ── Onboarding flow — no app-bar / bottom-nav ── */}
         <Route path="/welcome" element={<WelcomeScreen />} />
         <Route path="/role"    element={<RoleSelectScreen />} />
 
         {/* ── Main app — with AppLayout (app-bar + bottom-nav) ── */}
         <Route element={<AppLayout />}>
-          <Route index          element={<Home />}    />
+          <Route path="home"    element={<Home />}    />
           <Route path="search"  element={<Search />}  />
           <Route path="profile" element={<Profile />} />
         </Route>

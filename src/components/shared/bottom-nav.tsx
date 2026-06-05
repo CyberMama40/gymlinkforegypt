@@ -18,7 +18,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: '/',        end: true,  icon: Home,   labelKey: 'home'    },
+  { to: '/home',    end: true,  icon: Home,   labelKey: 'home'    },
   { to: '/search',             icon: Search, labelKey: 'search'  },
   { to: '/profile',            icon: User,   labelKey: 'profile' },
 ]
