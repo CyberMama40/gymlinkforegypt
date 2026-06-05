@@ -1,13 +1,19 @@
 import { createClient } from '@supabase/supabase-js'
 
-const url = import.meta.env.VITE_SUPABASE_URL
-const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
+const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined
 
 if (!url || !key) {
-  console.error(
-    '[supabase-client] Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY in .env\n' +
-    'Copy .env.example to .env and fill in your project values.'
+  console.warn(
+    '[supabase-client] VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY is missing.\n' +
+    'Copy .env.example → .env and fill in your Supabase project values.\n' +
+    'App will run but Supabase calls will fail until .env is configured.'
   )
 }
 
-export const supabase = createClient(url, key)
+// Fallback placeholders prevent createClient from throwing when .env is empty.
+// Real values must be set in .env before auth/db calls will work.
+export const supabase = createClient(
+  url  ?? 'https://placeholder.supabase.co',
+  key  ?? 'placeholder-key'
+)
