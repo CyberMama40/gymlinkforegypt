@@ -62,8 +62,7 @@ export function ClientOnboardingScreen() {
   }
 
   function handleSignUp() {
-    // TODO: wire up real sign-up flow for client
-    console.log('sign up as client')
+    navigate('/signup')
   }
 
   function handleLogin() {

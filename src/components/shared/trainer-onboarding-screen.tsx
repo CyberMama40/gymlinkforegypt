@@ -62,8 +62,7 @@ export function TrainerOnboardingScreen() {
   }
 
   function handleSignUp() {
-    // TODO: wire up real sign-up flow
-    console.log('sign up as trainer')
+    navigate('/signup')
   }
 
   function handleLogin() {

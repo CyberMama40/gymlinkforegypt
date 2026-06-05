@@ -4,6 +4,7 @@ import { WelcomeScreen } from './components/shared/welcome-screen'
 import { RoleSelectScreen } from './components/shared/role-select-screen'
 import { TrainerOnboardingScreen } from './components/shared/trainer-onboarding-screen'
 import { ClientOnboardingScreen } from './components/shared/client-onboarding-screen'
+import { SignupScreen } from './components/shared/signup-screen'
 
 // Stub screens — real screens will be built separately
 function Home() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/role"    element={<RoleSelectScreen />} />
         <Route path="/trainer" element={<TrainerOnboardingScreen />} />
         <Route path="/client"  element={<ClientOnboardingScreen />} />
+        <Route path="/signup"  element={<SignupScreen />} />
 
         {/* ── Main app — with AppLayout (app-bar + bottom-nav) ── */}
         <Route element={<AppLayout />}>
