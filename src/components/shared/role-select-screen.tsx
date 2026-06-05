@@ -24,6 +24,10 @@ export function RoleSelectScreen() {
     navigate('/trainer')
   }
 
+  function handleSelectClient() {
+    navigate('/client')
+  }
+
   return (
     <div className="min-h-screen bg-tertiary flex flex-col items-center justify-center gap-10 ps-6 pe-6">
 
@@ -42,10 +46,10 @@ export function RoleSelectScreen() {
           {t.trainer}
         </button>
 
-        {/* Client button — outlined style */}
+        {/* Client button — navigates to /client onboarding */}
         <button
           type="button"
-          onClick={() => console.log('client selected')}
+          onClick={handleSelectClient}
           className="w-full border border-neutral/30 text-neutral font-label font-bold text-base py-4 rounded-xl tracking-wide"
         >
           {t.client}
