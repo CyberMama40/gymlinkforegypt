@@ -1,0 +1,17 @@
+{
+  "name": "gymlink",
+  "version": "0.1.0",
+  "description": "Personalized fitness coaching platform — dual-sided app for trainers and clients",
+  "author": "Yuliana <yulianafarag@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "serve . -p 3000",
+    "start": "serve . -p 3000",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3",
+    "vercel": "^39.0.0"
+  }
+}
