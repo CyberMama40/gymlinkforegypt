@@ -2,29 +2,15 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate } from 'react-router'
 import { AppLayout } from './components/shared/app-layout'
 import { ActiveClientScreen } from './components/shared/active-client/active-client'
+import { WorkoutsScreen } from './components/shared/workouts/workouts-screen'
+import { MessagesScreen } from './components/shared/messages/messages-screen'
+import { ProfileScreen }  from './components/shared/profile/profile-screen'
 import { supabase } from './lib/supabase-client'
 import { WelcomeScreen } from './components/shared/welcome-screen'
 import { RoleSelectScreen } from './components/shared/role-select-screen'
 import { TrainerOnboardingScreen } from './components/shared/trainer-onboarding-screen'
 import { ClientOnboardingScreen } from './components/shared/client-onboarding-screen'
 import { SignupScreen } from './components/shared/signup-screen'
-
-// Stub screens — real screens will be built separately
-function Search() {
-  return (
-    <div className="ps-4 pe-4 pt-8 font-headline text-2xl text-neutral">
-      Search
-    </div>
-  )
-}
-
-function Profile() {
-  return (
-    <div className="ps-4 pe-4 pt-8 font-headline text-2xl text-neutral">
-      Profile
-    </div>
-  )
-}
 
 // Session guard for /home, /search, /profile.
 // Redirects to /welcome when there is no active Supabase session.
@@ -72,9 +58,10 @@ function App() {
         {/* ── Main app — protected: requires active Supabase session ── */}
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="home"    element={<ActiveClientScreen />} />
-            <Route path="search"  element={<Search />}  />
-            <Route path="profile" element={<Profile />} />
+            <Route path="home"     element={<ActiveClientScreen />} />
+            <Route path="workouts" element={<WorkoutsScreen />}     />
+            <Route path="messages" element={<MessagesScreen />}     />
+            <Route path="profile"  element={<ProfileScreen />}      />
           </Route>
         </Route>
 
