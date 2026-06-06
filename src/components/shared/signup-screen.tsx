@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import { useLang, getDir, type Lang } from '../../stores/use-lang'
+import { supabase } from '../../lib/supabase-client'
 
 // ── Temporary inline dictionary — will be replaced by proper i18n ──
 const copy: Record<Lang, {
@@ -20,6 +21,7 @@ const copy: Record<Lang, {
   errEmail:          string
   errPasswordShort:  string
   errPasswordMatch:  string
+  errOAuth:          string
 }> = {
   en: {
     screenTitle:      'Create Account',
@@ -37,6 +39,7 @@ const copy: Record<Lang, {
     errEmail:         'Please enter a valid email',
     errPasswordShort: 'Password must be at least 8 characters',
     errPasswordMatch: 'Passwords do not match',
+    errOAuth:         'Google sign-in failed. Please try again.',
   },
   ru: {
     screenTitle:      'Создать аккаунт',
@@ -54,6 +57,7 @@ const copy: Record<Lang, {
     errEmail:         'Введите корректный email',
     errPasswordShort: 'Пароль — не менее 8 символов',
     errPasswordMatch: 'Пароли не совпадают',
+    errOAuth:         'Ошибка входа через Google. Попробуйте ещё раз.',
   },
   ar: {
     screenTitle:      'إنشاء حساب',
@@ -71,6 +75,7 @@ const copy: Record<Lang, {
     errEmail:         'أدخل بريداً إلكترونياً صحيحاً',
     errPasswordShort: 'كلمة المرور 8 أحرف على الأقل',
     errPasswordMatch: 'كلمات المرور غير متطابقة',
+    errOAuth:         'فشل تسجيل الدخول عبر Google. حاول مرة أخرى.',
   },
 }
 
@@ -109,6 +114,8 @@ export function SignupScreen() {
   const [showPassword,        setShowPassword]        = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [errors,              setErrors]              = useState<FormErrors>({})
+  const [isGoogleLoading,     setIsGoogleLoading]     = useState(false)
+  const [oauthError,          setOauthError]          = useState<string | null>(null)
 
   // Outside AppLayout — apply RTL effect locally
   useEffect(() => {
@@ -157,9 +164,20 @@ export function SignupScreen() {
     }
   }
 
-  function handleGoogleSignup() {
-    // TODO: OAuth через Supabase (Google provider)
-    console.log('google signup')
+  async function handleGoogleSignup() {
+    setIsGoogleLoading(true)
+    setOauthError(null)
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options:  { redirectTo: `${window.location.origin}/home` },
+    })
+
+    if (error) {
+      setOauthError(t.errOAuth)
+      setIsGoogleLoading(false)
+    }
+    // On success — browser navigates to Google; no further action needed here.
   }
 
   function handleAppleSignup() {
@@ -322,10 +340,14 @@ export function SignupScreen() {
             <button
               type="button"
               onClick={handleGoogleSignup}
-              className="w-full bg-secondary border border-white/10 text-neutral font-headline font-bold text-sm py-4 rounded-lg tracking-wide"
+              disabled={isGoogleLoading}
+              className="w-full bg-secondary border border-white/10 text-neutral font-headline font-bold text-sm py-4 rounded-lg tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.google}
             </button>
+            {oauthError && (
+              <span className="font-label text-xs text-[#ff6b6b]">{oauthError}</span>
+            )}
             <button
               type="button"
               onClick={handleAppleSignup}
