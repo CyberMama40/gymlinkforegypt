@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate } from 'react-router'
 import { AppLayout } from './components/shared/app-layout'
 import { ActiveClientScreen } from './components/shared/active-client/active-client'
-import { WorkoutsScreen } from './components/shared/workouts/workouts-screen'
-import { MessagesScreen } from './components/shared/messages/messages-screen'
+import { WorkoutsScreen }   from './components/shared/workouts/workouts-screen'
+import { ExercisesScreen }  from './components/shared/exercises/exercises-screen'
+import { MessagesScreen }   from './components/shared/messages/messages-screen'
 import { ProfileScreen }  from './components/shared/profile/profile-screen'
 import { supabase } from './lib/supabase-client'
 import { WelcomeScreen } from './components/shared/welcome-screen'
@@ -59,8 +60,9 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route path="home"     element={<ActiveClientScreen />} />
-            <Route path="workouts" element={<WorkoutsScreen />}     />
-            <Route path="messages" element={<MessagesScreen />}     />
+            <Route path="workouts"  element={<WorkoutsScreen />}   />
+            <Route path="exercises" element={<ExercisesScreen />}  />
+            <Route path="messages"  element={<MessagesScreen />}   />
             <Route path="profile"  element={<ProfileScreen />}      />
           </Route>
         </Route>
