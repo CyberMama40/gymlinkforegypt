@@ -76,18 +76,20 @@ const copy: Record<Lang, {
 type CategorySlug = keyof typeof copy.en.categories
 
 interface Category {
-  slug:     CategorySlug
-  isCustom: boolean
+  slug:      CategorySlug
+  isCustom:  boolean
+  /** Local path under /public — omit until photo is available, falls back to dark placeholder */
+  imageSrc?: string
 }
 
 const CATEGORIES: Category[] = [
-  { slug: 'arms',      isCustom: false },
-  { slug: 'back',      isCustom: false },
-  { slug: 'cardio',    isCustom: false },
-  { slug: 'chest',     isCustom: false },
-  { slug: 'core',      isCustom: false },
-  { slug: 'legs',      isCustom: false },
-  { slug: 'shoulders', isCustom: false },
+  { slug: 'arms',      isCustom: false, imageSrc: '/categories/screen.png' },
+  { slug: 'back',      isCustom: false, imageSrc: '/categories/back.png' },
+  { slug: 'cardio',    isCustom: false, imageSrc: '/categories/cardio.png' },
+  { slug: 'chest',     isCustom: false, imageSrc: '/categories/chest.png' },
+  { slug: 'core',      isCustom: false, imageSrc: '/categories/core.png' },
+  { slug: 'legs',      isCustom: false, imageSrc: '/categories/legs.png'      },
+  { slug: 'shoulders', isCustom: false, imageSrc: '/categories/shoulders.png' },
   { slug: 'custom',    isCustom: true  },
 ]
 
@@ -118,6 +120,7 @@ export function ExercisesScreen() {
             slug={cat.slug}
             label={t.categories[cat.slug]}
             isCustom={cat.isCustom}
+            imageSrc={cat.imageSrc}
             onClick={handleSelectCategory}
           />
         ))}

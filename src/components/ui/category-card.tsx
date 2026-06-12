@@ -12,14 +12,16 @@
 import { Plus } from 'lucide-react'
 
 interface CategoryCardProps {
-  slug:     string
-  label:    string
-  isCustom: boolean
+  slug:      string
+  label:     string
+  isCustom:  boolean
+  /** Optional photo from public/categories/<slug>.jpg — falls back to dark gradient placeholder */
+  imageSrc?: string
   /** Callback prop — fires when card is pressed */
-  onClick:  (slug: string) => void
+  onClick:   (slug: string) => void
 }
 
-export function CategoryCard({ slug, label, isCustom, onClick }: CategoryCardProps) {
+export function CategoryCard({ slug, label, isCustom, imageSrc, onClick }: CategoryCardProps) {
 
   // ── Custom card ─────────────────────────────────────────────────────────
   if (isCustom) {
@@ -36,7 +38,7 @@ export function CategoryCard({ slug, label, isCustom, onClick }: CategoryCardPro
     )
   }
 
-  // ── Normal placeholder card ──────────────────────────────────────────────
+  // ── Normal card (photo or dark-gradient placeholder) ─────────────────────
   return (
     <button
       type="button"
@@ -44,12 +46,17 @@ export function CategoryCard({ slug, label, isCustom, onClick }: CategoryCardPro
       aria-label={label}
       className="relative aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-secondary to-tertiary shadow-[0_0_16px_rgba(204,255,0,0.08)] hover:shadow-[0_0_22px_rgba(204,255,0,0.18)] active:scale-95 transition-all"
     >
-      {/* TODO: заменить плейсхолдер на фото категории из Supabase Storage.
-          Добавь <img className="absolute inset-0 w-full h-full object-cover" src={...} alt="" />
-          перед overlay-div — оверлей автоматически обеспечит читаемость текста. */}
+      {/* Photo — shown when imageSrc is provided; replace src with Supabase Storage URL later */}
+      {imageSrc && (
+        <img
+          src={imageSrc}
+          alt={label}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      )}
 
-      {/* Gradient overlay — ensures label stays readable over any future photo */}
-      <div className="absolute inset-0 bg-gradient-to-t from-tertiary/90 via-tertiary/25 to-transparent" />
+      {/* Gradient overlay — keeps label readable over photo or plain bg */}
+      <div className="absolute inset-0 bg-gradient-to-t from-tertiary/90 via-tertiary/30 to-transparent" />
 
       {/* Label + kinetic border — anchored to bottom-start corner */}
       <div className="absolute bottom-0 start-0 end-0 p-4">
