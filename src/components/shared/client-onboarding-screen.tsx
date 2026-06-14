@@ -65,9 +65,8 @@ export function ClientOnboardingScreen() {
     navigate('/signup')
   }
 
-  function handleLogin() {
-    // TODO: wire up real login flow for client
-    console.log('login as client')
+  function handleNavigateToSignIn() {
+    navigate('/login')
   }
 
   return (
@@ -136,7 +135,7 @@ export function ClientOnboardingScreen() {
             </button>
             <button
               type="button"
-              onClick={handleLogin}
+              onClick={handleNavigateToSignIn}
               className="w-full border border-secondary text-neutral font-headline font-bold text-base py-4 rounded-lg tracking-wide"
             >
               {t.ctaLogin}

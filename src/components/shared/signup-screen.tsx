@@ -185,9 +185,8 @@ export function SignupScreen() {
     console.log('apple signup')
   }
 
-  function handleGoToLogin() {
-    // TODO: navigate to /login when that screen is built
-    navigate('/welcome')
+  function handleNavigateToSignIn() {
+    navigate('/login')
   }
 
   return (
@@ -357,10 +356,10 @@ export function SignupScreen() {
             </button>
           </div>
 
-          {/* Login link */}
+          {/* Sign-in link — haveAccount key already localised in all 3 langs */}
           <button
             type="button"
-            onClick={handleGoToLogin}
+            onClick={handleNavigateToSignIn}
             className="w-full text-primary font-headline font-bold text-sm py-3 tracking-wide"
           >
             {t.haveAccount}
