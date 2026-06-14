@@ -8,6 +8,7 @@
  * Inside AppLayout — RTL and shell handled by the layout; no local useEffect.
  */
 
+import { useNavigate } from 'react-router'
 import { useLang, type Lang } from '../../../stores/use-lang'
 import { CategoryCard } from '../../ui/category-card'
 
@@ -95,12 +96,12 @@ const CATEGORIES: Category[] = [
 
 // ── Component ────────────────────────────────────────────────────────────────
 export function ExercisesScreen() {
-  const lang = useLang((s) => s.lang)
-  const t    = copy[lang]
+  const lang     = useLang((s) => s.lang)
+  const navigate = useNavigate()
+  const t        = copy[lang]
 
   function handleSelectCategory(slug: string) {
-    // TODO: переход на список упражнений категории (отдельный экран позже)
-    console.log('[ExercisesScreen] selected category:', slug)
+    navigate(`/exercises/${slug}`)
   }
 
   return (

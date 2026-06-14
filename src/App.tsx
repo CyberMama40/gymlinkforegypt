@@ -11,7 +11,9 @@ import { WelcomeScreen } from './components/shared/welcome-screen'
 import { RoleSelectScreen } from './components/shared/role-select-screen'
 import { TrainerOnboardingScreen } from './components/shared/trainer-onboarding-screen'
 import { ClientOnboardingScreen } from './components/shared/client-onboarding-screen'
-import { SignupScreen } from './components/shared/signup-screen'
+import { SignupScreen }             from './components/shared/signup-screen'
+import { LoginScreen }              from './components/shared/login-screen'
+import { CategoryExercisesScreen }  from './components/shared/exercises/category-exercises-screen'
 
 // Session guard for /home, /search, /profile.
 // Redirects to /welcome when there is no active Supabase session.
@@ -55,16 +57,23 @@ function App() {
         <Route path="/trainer" element={<TrainerOnboardingScreen />} />
         <Route path="/client"  element={<ClientOnboardingScreen />} />
         <Route path="/signup"  element={<SignupScreen />} />
+        <Route path="/login"   element={<LoginScreen />}  />
 
         {/* ── Main app — protected: requires active Supabase session ── */}
         <Route element={<ProtectedRoute />}>
+
+          {/* Shell: AppBar + BottomNav */}
           <Route element={<AppLayout />}>
-            <Route path="home"     element={<ActiveClientScreen />} />
-            <Route path="workouts"  element={<WorkoutsScreen />}   />
-            <Route path="exercises" element={<ExercisesScreen />}  />
-            <Route path="messages"  element={<MessagesScreen />}   />
-            <Route path="profile"  element={<ProfileScreen />}      />
+            <Route path="home"      element={<ActiveClientScreen />} />
+            <Route path="workouts"  element={<WorkoutsScreen />}     />
+            <Route path="exercises" element={<ExercisesScreen />}    />
+            <Route path="messages"  element={<MessagesScreen />}     />
+            <Route path="profile"   element={<ProfileScreen />}      />
           </Route>
+
+          {/* Full-screen drill-down routes — no AppBar / BottomNav */}
+          <Route path="exercises/:category" element={<CategoryExercisesScreen />} />
+
         </Route>
 
       </Routes>
